@@ -180,7 +180,8 @@ export function postNewJobCircular(jobData) {
 }
 
 export function exportATSReport() {
-    let csv = "Candidate Name,Applied Role,AI Match Score,Stage,Mobile,Email,Experience,Skills\n";
+    let csv = "Candidate Name,Applied Role,AI Match Score,Stage,Mobile,Email,Experience,Skills
+";
     Store.data.candidates.forEach(c => {
         csv += `"${c.name}","${c.role}","${c.aiScore}%","${c.stage.toUpperCase()}","${c.mobile}","${c.email}","${c.exp || ''}","${c.skills}"\n`;
     });
