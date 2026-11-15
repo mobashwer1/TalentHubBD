@@ -52,7 +52,7 @@ export function renderCareerPortalJobs() {
                     ${(job.skills || '').split(',').map(s => `<span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${s.trim()}</span>`).join('')}
                 </div>
             </div>
-            <button onclick="window.AppActions.openApplyModal('${job.title.replace(/'/g, "\'")}')" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs rounded-xl shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2">
+            <button onclick="window.AppActions.openApplyModal('${job.title.replace(/'/g, "\\'")}')" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs rounded-xl shadow-xs transition-all cursor-pointer flex items-center justify-center gap-2">
                 <i class="fa-solid fa-paper-plane"></i> Apply & Parse CV
             </button>
         </div>
@@ -140,7 +140,7 @@ export function renderATSPipeline() {
         `;
     });
 
-    container.innerHTML = html || `<div class="bg-white rounded-3xl border border-slate-200 p-10 text-center text-sm text-slate-500">No candidates match the current filter criteria.</div>`;
+    container.innerHTML = html || `<div class="bg-white rounded-3xl border border-slate-200 p-10 text-center text-sm text-sm text-slate-500">No candidates match the current filter criteria.</div>`;
 }
 
 export function submitCandidateApplication(formData) {
@@ -180,11 +180,9 @@ export function postNewJobCircular(jobData) {
 }
 
 export function exportATSReport() {
-    let csv = "Candidate Name,Applied Role,AI Match Score,Stage,Mobile,Email,Experience,Skills
-";
+    let csv = "Candidate Name,Applied Role,AI Match Score,Stage,Mobile,Email,Experience,Skills\n";
     Store.data.candidates.forEach(c => {
-        csv += `"${c.name}","${c.role}","${c.aiScore}%","${c.stage.toUpperCase()}","${c.mobile}","${c.email}","${c.exp || ''}","${c.skills}"
-`;
+        csv += `"${c.name}","${c.role}","${c.aiScore}%","${c.stage.toUpperCase()}","${c.mobile}","${c.email}","${c.exp || ''}","${c.skills}"\n`;
     });
     downloadCSV('TalentHub_BD_ATS_Report.csv', csv);
     showToast('Report Downloaded', 'ATS Pipeline CSV exported successfully.');
